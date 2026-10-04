@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday!</title>
+    <!-- Google Fonts for handwriting and stylish headers -->
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        /* Base Reset & Background with Thicker, Larger Blue Check Lines */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            /* Thicker (3px) and larger (60px) light blue check lines */
+            background-image: 
+                linear-gradient(to right, rgba(135, 206, 250, 0.45) 3px, transparent 3px),
+                linear-gradient(to bottom, rgba(135, 206, 250, 0.45) 3px, transparent 3px);
+            background-size: 60px 60px;
+            color: #2c3e50;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1100px;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            padding: 20px;
+        }
+
+        /* Page Management */
+        .page {
+            display: none;
+            width: 100%;
+            height: 100%;
+            animation: fadeIn 0.8s ease-in-out forwards;
+        }
+
+        .page.active {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ---------------------------------------------------- */
+        /* PAGE 1: ENVELOPE LANDING PAGE                         */
+        /* ---------------------------------------------------- */
+        #landing-page {
+            text-align: center;
+            position: relative;
+            width: 100%;
+            max-width: 700px;
+            margin: auto;
+        }
+
+        .landing-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            position: relative;
+            width: 100%;
+        }
+
+        /* Side Decorations (Camera & Bouquet) */
+        .side-decoration {
+            font-size: 3.5rem;
+            animation: floatDeco 3s ease-in-out infinite;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            user-select: none;
+        }
+
+        .side-decoration.right {
+            animation-delay: 1.5s;
+        }
+
+        @keyframes floatDeco {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+
+        /* Envelope / Card Container */
+        .envelope-container {
+            position: relative;
+            background: #fff;
+            border: 4px solid #3498db;
+            border-radius: 16px;
+            padding: 45px 35px;
+            box-shadow: 0 15px 35px rgba(52, 152, 219, 0.2);
+            width: 380px;
+            max-width: 90vw;
+            text-align: center;
+            background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%);
+        }
+
+        .envelope-container h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #1b4f72;
+            margin-bottom: 15px;
+        }
+
+        .envelope-container p {
+            font-size: 1.05rem;
+            color: #555;
+            margin-bottom: 30px;
+        }
+
+        /* Click Me Button on Bottom Right of Card */
+        .click-me-btn {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            background: linear-gradient(135deg, #3498db, #2980b9);
+            color: white;
+            border: none;
+            padding: 12px 26px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .click-me-btn:hover {
+            transform: scale(1.08);
+            background: linear-gradient(135deg, #2980b9, #1b4f72);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
+        }
+
+        /* ---------------------------------------------------- */
+        /* PAGE 2: OPEN BOOK PAGE                                */
+        /* ---------------------------------------------------- */
+        .book-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .book {
+            display: flex;
+            width: 100%;
+            background: #fff;
+            border: 6px solid #1b4f72;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            min-height: 480px;
+            position: relative;
+        }
+
+        /* Center Binding / Spine */
+        .book-spine {
+            width: 24px;
+            background: linear-gradient(to right, #1b4f72, #3498db, #1b4f72);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+            z-index: 10;
+            border-left: 2px solid #153e5a;
+            border-right: 2px solid #153e5a;
+        }
+
+        .book-page {
+            flex: 1;
+            padding: 40px 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: #fffcf8;
+            position: relative;
+        }
+
+        .book-page.left-page {
+            border-right: 1px dashed #dcdcdc;
+            background: radial-gradient(circle, #ffffff 80%, #f7fbff 100%);
+        }
+
+        .book-page.right-page {
+            text-align: left;
+            align-items: flex-start;
+        }
+
+        .photo-frame {
+            width: 240px;
+            height: 300px;
+            border: 8px solid white;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            border-radius: 4px;
+            overflow: hidden;
+            background: #eee;
+            transform: rotate(-2deg);
+            transition: transform 0.3s ease;
+        }
+
+        .photo-frame:hover {
+            transform: rotate(0deg) scale(1.03);
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .book-page h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #1b4f72;
+            margin-bottom: 15px;
+        }
+
+        .book-page p {
+            font-family: 'Caveat', cursive;
+            font-size: 1.5rem;
+            color: #333;
+            line-height: 1.5;
+            margin-bottom: 20px;
+        }
+
+        /* Next Page Arrow Button inside Book */
+        .next-btn {
+            margin-top: auto;
+            background: #1b4f72;
+            color: white;
+            border: none;
+            padding: 10px 22px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.3s;
+            align-self: flex-end;
+        }
+
+        .next-btn:hover {
+            background: #3498db;
+        }
+
+        /* ---------------------------------------------------- */
+        /* PAGE 3: HORIZONTAL FILM ROLL SLIDE (MEMORY LANE)      */
+        /* ---------------------------------------------------- */
+        #film-page {
+            text-align: center;
+            width: 100%;
+        }
+
+        .film-header {
+            margin-bottom: 25px;
+        }
+
+        .film-header h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #1b4f72;
+            margin-bottom: 5px;
+        }
+
+        .film-header p {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        /* Film Roll Container */
+        .film-roll-container {
+            width: 100%;
+            overflow-x: auto;
+            padding: 30px 0;
+            white-space: nowrap;
+            background: #111;
+            border-top: 6px solid #333;
+            border-bottom: 6px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            position: relative;
+        }
+
+        .film-roll-container::-webkit-scrollbar {
+            height: 8px;
+        }
+        .film-roll-container::-webkit-scrollbar-thumb {
+            background: #555;
+            border-radius: 4px;
+        }
+
+        .film-strip {
+            display: inline-flex;
+            gap: 25px;
+            padding: 0 40px;
+            align-items: center;
+        }
+
+        .film-frame {
+            display: inline-block;
+            width: 220px;
+            height: 280px;
+            background: #000;
+            border: 3px solid #444;
+            padding: 15px 10px;
+            border-radius: 4px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            position: relative;
+            vertical-align: middle;
+            transition: transform 0.3s;
+        }
+
+        .film-frame:hover {
+            transform: scale(1.05);
+            border-color: #3498db;
+        }
+
+        /* Sprocket Holes on top and bottom of film frame */
+        .film-frame::before, .film-frame::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            height: 8px;
+            background: repeating-linear-gradient(
+                90deg,
+                #111,
+                #111 10px,
+                #666 10px,
+                #666 18px
+            );
+        }
+        .film-frame::before { top: 3px; }
+        .film-frame::after { bottom: 3px; }
+
+        .film-img-box {
+            width: 100%;
+            height: 210px;
+            background: #222;
+            margin-top: 8px;
+            overflow: hidden;
+            border-radius: 2px;
+        }
+
+        .film-img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .film-caption {
+            color: #aaa;
+            font-size: 0.8rem;
+            text-align: center;
+            margin-top: 6px;
+            font-family: monospace;
+        }
+
+        .continue-btn-container {
+            margin-top: 30px;
+        }
+
+        .action-btn {
+            background: linear-gradient(135deg, #1b4f72, #3498db);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 5px 20px rgba(27, 79, 114, 0.4);
+            transition: all 0.3s ease;
+        }
+
+        .action-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(27, 79, 114, 0.6);
+        }
+
+        /* ---------------------------------------------------- */
+        /* PAGE 4: FINAL LETTER PAGE                             */
+        /* ---------------------------------------------------- */
+        #final-page {
+            text-align: center;
+            width: 100%;
+            max-width: 650px;
+            margin: auto;
+        }
+
+        .letter-card {
+            background: #ffffff;
+            border: 3px solid #3498db;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            position: relative;
+            background: linear-gradient(135deg, #fffcf9 0%, #f2f9ff 100%);
+        }
+
+        .letter-card h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 2.2rem;
+            color: #1b4f72;
+            margin-bottom: 20px;
+        }
+
+        .attached-photo-preview {
+            width: 130px;
+            height: 150px;
+            border: 5px solid white;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+            margin: 0 auto 20px auto;
+            transform: rotate(3deg);
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .attached-photo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .letter-card p {
+            font-family: 'Caveat', cursive;
+            font-size: 1.6rem;
+            color: #333;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .signature {
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            font-weight: 700;
+            color: #1b4f72;
+            font-size: 1.3rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .book {
+                flex-direction: column;
+                min-height: auto;
+            }
+            .book-spine {
+                width: 100%;
+                height: 16px;
+            }
+            .book-page.left-page {
+                border-right: none;
+                border-bottom: 1px dashed #dcdcdc;
+            }
+            .landing-wrapper {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- LANDING PAGE -->
+        <div id="landing-page" class="page active">
+            <div class="landing-wrapper">
+                <!-- Left Side Digital Camera -->
+                <div class="side-decoration left" title="Memories Camera">📷</div>
+
+                <!-- Envelope / Card Box -->
+                <div class="envelope-container">
+                    <h1>Happy Birthday!</h1>
+                    <p>A special surprise awaits you inside. Click the button below to open your card!</p>
+                    <button class="click-me-btn" onclick="goToPage('book-page-wrapper')">Click Me</button>
+                </div>
+
+                <!-- Right Side Flower Bouquet -->
+                <div class="side-decoration right" title="Birthday Flowers">💐</div>
+            </div>
+        </div>
+
+        <!-- OPEN BOOK PAGE -->
+        <div id="book-page-wrapper" class="page">
+            <div class="book-wrapper">
+                <div class="book">
+                    <!-- Left Page: Photo 1 attached -->
+                    <div class="book-page left-page">
+                        <div class="photo-frame">
+                            <img src="WhatsApp Image 2026-10-04 at 5.45.06 PM.jpeg" alt="Birthday Photo" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80'">
+                        </div>
+                    </div>
+                    <!-- Center Spine -->
+                    <div class="book-spine"></div>
+                    <!-- Right Page: Message -->
+                    <div class="book-page right-page">
+                        <h2>Dearest Friend,</h2>
+                        <p>Wishing you a year filled with grand adventures, immense success, and endless joy! May all your dreams turn into reality today and always. Have an absolutely fantastic birthday!</p>
+                        <button class="next-btn" onclick="goToPage('film-page')">Next Page &rarr;</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- FILM ROLL MEMORY LANE PAGE -->
+        <div id="film-page" class="page">
+            <div class="film-header">
+                <h2>Memory Lane</h2>
+                <p>Scroll through the cinematic film roll of wonderful moments</p>
+            </div>
+            
+            <div class="film-roll-container">
+                <div class="film-strip">
+                    <!-- Frame 1 -->
+                    <div class="film-frame">
+                        <div class="film-img-box">
+                            <img src="830496914_1078884241721387_6772305613461653149_n.jpg" alt="Memory 1" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80'">
+                        </div>
+                        <div class="film-caption">#01 • Classic</div>
+                    </div>
+                    <!-- Frame 2 -->
+                    <div class="film-frame">
+                        <div class="film-img-box">
+                            <img src="830958203_28497536069905100_5485658767626694489_n.jpg" alt="Memory 2" onerror="this.src='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&auto=format&fit=crop&q=80'">
+                        </div>
+                        <div class="film-caption">#02 • Gym Flow</div>
+                    </div>
+                    <!-- Frame 3 -->
+                    <div class="film-frame">
+                        <div class="film-img-box">
+                            <img src="829268257_955702097591515_669138464252727309_n.jpg" alt="Memory 3" onerror="this.src='https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?w=400&auto=format&fit=crop&q=80'">
+                        </div>
+                        <div class="film-caption">#03 • Rose Vibe</div>
+                    </div>
+                    <!-- Frame 4 -->
+                    <div class="film-frame">
+                        <div class="film-img-box">
+                            <img src="828411999_3966790940295500_1608993482685443330_n.jpg" alt="Memory 4" onerror="this.src='https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400&auto=format&fit=crop&q=80'">
+                        </div>
+                        <div class="film-caption">#04 • Vibe</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="continue-btn-container">
+                <button class="action-btn" onclick="goToPage('final-page')">Read Final Letter &rarr;</button>
+            </div>
+        </div>
+
+        <!-- FINAL LETTER PAGE -->
+        <div id="final-page" class="page">
+            <div class="letter-card">
+                <h2>A Final Note For You</h2>
+                <div class="attached-photo-preview">
+                    <!-- Photo 1 attached again as requested -->
+                    <img src="WhatsApp Image 2026-10-04 at 5.45.06 PM.jpeg" alt="Attached Photo" onerror="this.src='https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&auto=format&fit=crop&q=80'">
+                </div>
+                <p>May this birthday mark the beginning of an extraordinary chapter in your life. Stay as amazing, charismatic, and wonderful as you always are. Cheers to many more years of happiness!</p>
+                <div class="signature">With best wishes, Your Friend</div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Simple function to switch between pages smoothly
+        function goToPage(pageId) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active'));
+            
+            const target = document.getElementById(pageId);
+            if (target) {
+                target.classList.add('active');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    </script>
+</body>
+</html>
